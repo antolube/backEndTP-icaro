@@ -1,0 +1,31 @@
+.login{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  min-height:559px;
+  background-color: #6d6a6a;
+  // z-index: 1;
+
+  &__header{
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+
+
+  }
+}
+ .ancho{
+    width:80%;
+ }
+
+.alto{
+  height:50px;
+}
+
+.spinner{
+  margin:0 auto;
+}
+
+.register{
+  margin:15px;
+}
