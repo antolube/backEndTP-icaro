@@ -61,6 +61,11 @@ const exceptionType = {
           message: "El usuario ya se encuentra registrado",
           httpStatus: 400
       },
+      emailExists: {
+          code: 104,
+          message: "El email ya se encuentra registrado",
+          httpStatus: 400
+      },
   },
   database: {
       entity: {

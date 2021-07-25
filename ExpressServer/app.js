@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const router = express.Router();
-const port = 3000;
+const port = process.env.PORT ||3000;
 const passport = require('passport');
 const passportConfig = require("./config/server/passportConfig")
 const config = require('config');
@@ -26,6 +26,6 @@ passport.use(passportConfig.createStrategy())
 app.use(passport.initialize())
 
 app.listen(port,()=>{
-console.log(`App listen at http:localhost:${port}`);
+console.log(`Server listen at http:localhost:${port}`);
 })
 

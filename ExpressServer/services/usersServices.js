@@ -10,10 +10,16 @@ const config = require("config")
 const create = async ({user_name, password,name,last_name,country,city,email}) => {
     // logger.info(`createUser - userName[${userName}]`)
     console.log("createUser - userName["+ user_name+"]");
-
+//Check Duplicate UserName
 const userExist = await userModel.findOne({where: {user_name:user_name.toLowerCase()}});
 if(userExist){
   throw new error.AppError(exceptions.exceptionType.users.userExists);
+}
+
+//Check Duplicate Email
+const emailExist = await userModel.findOne({where: {email:email.toLowerCase()}});
+if(emailExist){
+  throw new error.AppError(exceptions.exceptionType.users.emailExists);
 }
 
     const data = {
