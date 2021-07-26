@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+}
+
+th{
+  width:25%;
+}
+
+.pointer{
+  cursor: pointer;
+}
+.enviados{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #6d6a6a;
+
+
+}
+
+.enviados1{
+
+  width:80%;
+
+  min-height:100%;
+  // margin: 0 100px ;
+  background-color: #6d6a6a;
+
+}

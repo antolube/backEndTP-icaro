@@ -1,15 +1,4 @@
-table {
-  width: 100%;
-}
-
-th{
-  width:25%;
-}
-
-.pointer{
-  cursor: pointer;
-}
-.recibidos{
+.mensaje{
 
   display: flex;
   justify-content: center;
@@ -20,7 +9,15 @@ th{
 
 }
 
-.recibidos1{
+.ancho{
+align-items: center;
+  justify-content: center;
+  width:80%;
+  height:50px;
+  margin:5px;
+}
+
+.mensaje1{
 
   width:80%;
 
@@ -28,4 +25,7 @@ th{
   // margin: 0 100px ;
   background-color: #6d6a6a;
 
+}
+.spinner{
+  margin:0 auto;
 }

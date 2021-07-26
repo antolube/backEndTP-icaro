@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import  { User } from 'src/app/models/userModel';
+import { AuthService } from 'src/app/services/auth.service';
 
 interface Province{
   value: string;
@@ -12,8 +13,6 @@ interface Country{
   value: string;
   viewValue: string;
 }
-
-
 
 @Component({
   selector: 'app-sing-up',
@@ -26,6 +25,9 @@ export class SingUpComponent implements OnInit {
   panelOpenState = false;
   hide = true;
   loading= false;
+  isSuccessful = false; //para implementar en formulario
+  isSignUpFailed = false; //para implementar en formulario
+  errorMessage = '';
 
   provinces: Province[] = [
     {value: 'Cba-0', viewValue: 'Córdoba'},
@@ -43,6 +45,7 @@ export class SingUpComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private _snackbar:MatSnackBar,
+    private _authService: AuthService,
     // private _usuariosService:UsuariosService ,
     // private _comunicacion:InteractionsService
     ) {
@@ -63,6 +66,7 @@ export class SingUpComponent implements OnInit {
   }
 
   ingresarNuevo(){
+
     console.log(this.register);
 
     const user : User = {
@@ -74,13 +78,24 @@ export class SingUpComponent implements OnInit {
       email: this.register.value.email,
       country: this.register.value.country,
       city: this.register.value.city,
-    }
+    };
 
-    console.log(user);
+    console.log(user + "Se toma el registro");
 
+    this._authService.register(user).subscribe(
+      data => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.isSignUpFailed = false;
+        console.log("se lo pasa al servico");
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isSignUpFailed = true;
+      });
     // this._usuariosService.agregarUsuario(user);
-    this.fakelogin();
-    this.registroOk();
+    // this.fakelogin();
+    // this.registroOk();
     // this.comunicoUsuario();
 
 
