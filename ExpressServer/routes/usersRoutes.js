@@ -7,15 +7,15 @@ const {required} = require('../middlewares/auth');
 //las rutas del usuario
 
 //acceso protejido con middlewares
-router.get('/',[required], (req, res) =>{
+router.get('/', (req, res) =>{
     routeController.handleRequest(req, res,userController.getAll)
 })
 router.get('/:id',[required], (req, res) =>{
     routeController.handleRequest(req, res,userController.getById)
 })
-// router.post('/', (req, res) =>{
-//     routeController.handleRequest(req, res,userController.create)
-// })
+router.post('/singup', (req, res) =>{
+    routeController.handleRequest(req, res,userController.create)
+})
 router.patch('/:id',[required], (req, res) =>{
     routeController.handleRequest(req, res,userController.updated)
 })

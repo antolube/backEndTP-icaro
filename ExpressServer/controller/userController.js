@@ -5,9 +5,9 @@ const error = require('../common/error');
 const getAll = async (req,res)=>{
     const query = req.query
     console.log("get all controller - query : "+JSON.stringify(query))
-    if(!req.query.condition){
-        throw new error.AppError(exceptions.exceptionType.productos.badRequest,"debe colocar un estado 0 ó 1")
-    }
+    // if(!req.query.condition){
+    //     throw new error.AppError(exceptions.exceptionType.productos.badRequest,"debe colocar un estado 0 ó 1")
+    // }
     const filter = {
         condition: req.query.condition,
     }
