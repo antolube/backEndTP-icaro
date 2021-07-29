@@ -69,7 +69,7 @@ export class SingUpComponent implements OnInit {
 
     console.log(this.register);
 
-    const user : User = {
+    const user = {
       user_name: this.register.value.user_name,
       name: this.register.value.name,
       last_name: this.register.value.last_name,

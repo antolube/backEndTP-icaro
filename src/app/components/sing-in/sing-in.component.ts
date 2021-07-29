@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// import { Router} from '@angular/router';
+import { Router} from '@angular/router';
 // import { User } from 'src/app/models/userModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
@@ -25,7 +25,7 @@ export class SingInComponent implements OnInit {
 
   constructor(private fb :FormBuilder ,
     private _snackbar:MatSnackBar,
-    // private router:Router,
+    private router:Router,
     private _authService: AuthService,
     private _tokenStorage:TokenStorageService
     // private _usuariosService:UsuariosService,
@@ -40,50 +40,60 @@ export class SingInComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    if (this._tokenStorage.getToken()) {
-      this.isLoggedIn = true;}
+    // if (this._tokenStorage.getToken()) {
+    //   this.isLoggedIn = true;}
   }
 
   // cargarUsuarios(){
   //   this.usuarios = this._usuariosService.getUsuarios();
   // }
 
-
-
   ingresar(){
-    console.log(this.form);
-    const user_name = this.form.value.usuario;
+      const user_name = this.form.value.usuario;
     const password = this.form.value.password;
 
-    this._authService.login(user_name, password).subscribe(
-      data => {
-        this._tokenStorage.saveToken(data.accessToken);
-        this._tokenStorage.saveUser(data);
-
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        // this.roles = this.tokenStorage.getUser().roles;
-        // this.reloadPage();
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-        this.error();
-        this.form.reset();
-      }
-    );
-
-    // if(usuario == "antonio" && password == "a" ){
-    //   //redireccionamos al escritorio de usuario
-    //   this.fakelogin();
-    //   // this.usuarioLogeado();
-    //   // this.comunicoUsuario();
-    // }else{
-    //   //mostrar mensaje de error
-    //   this.error();
-    //   this.form.reset();
-    // }
+    this._authService.login(user_name, password).subscribe((res:any) =>{
+      console.log(res);
+      localStorage.setItem('token',res.token);
+      this.router.navigate(['/dashboard'])
+    });
   }
+
+
+  // ingresar(){
+  //   console.log(this.form);
+  //   const user_name = this.form.value.usuario;
+  //   const password = this.form.value.password;
+
+  //   this._authService.login(this.form.value).subscribe(
+  //     data => {
+  //       this._tokenStorage.saveToken(data.);
+  //       this._tokenStorage.saveUser(data);
+
+  //       this.isLoginFailed = false;
+  //       this.isLoggedIn = true;
+  //       // this.roles = this.tokenStorage.getUser().roles;
+  //       // this.reloadPage();
+  //     },
+  //     err => {
+  //       this.errorMessage = err.error.message;
+  //       this.isLoginFailed = true;
+  //       this.error();
+  //       this.form.reset();
+  //     }
+  //   );
+
+  //   // if(usuario == "antonio" && password == "a" ){
+  //   //   //redireccionamos al escritorio de usuario
+  //   //   this.fakelogin();
+  //   //   // this.usuarioLogeado();
+  //   //   // this.comunicoUsuario();
+  //   // }else{
+  //   //   //mostrar mensaje de error
+  //   //   this.error();
+  //   //   this.form.reset();
+  //   // }
+  // }
 
   error(){
     this._snackbar.open('Usuario o Contraseña Incorrectos','',
