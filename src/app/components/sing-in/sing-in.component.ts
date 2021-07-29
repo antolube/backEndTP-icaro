@@ -37,9 +37,9 @@ export class SingInComponent implements OnInit {
       const user_name = this.form.value.usuario;
     const password = this.form.value.password;
 
-    this._authService.login(user_name, password).subscribe((res:any) =>{
-      // console.log(res);
-      localStorage.setItem('token',res.token);
+    this._authService.login(user_name, password).subscribe( (data:any) =>{
+      console.log(data);
+      localStorage.setItem('token',data.token);
       this.router.navigate(['/dashboard'])
     });
   }

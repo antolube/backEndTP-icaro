@@ -10,7 +10,6 @@ import { SingUpComponent } from './components/sing-up/sing-up.component';
 import { MaterialModule } from './material/material.module';
 
 //providers
-
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
 @NgModule({
   declarations: [
