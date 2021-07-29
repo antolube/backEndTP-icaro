@@ -8,8 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SingInComponent } from './components/sing-in/sing-in.component';
 import { SingUpComponent } from './components/sing-up/sing-up.component';
 import { MaterialModule } from './material/material.module';
-// import { AuthInterceptor } from './_helpers/auth.interceptor';
-import { authInterceptorProviders } from './_helpers/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +23,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     HttpClientModule,
   ],
   providers: [
-    authInterceptorProviders
+
   ],
   bootstrap: [AppComponent]
 })
