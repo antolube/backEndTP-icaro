@@ -9,6 +9,9 @@ import { SingInComponent } from './components/sing-in/sing-in.component';
 import { SingUpComponent } from './components/sing-up/sing-up.component';
 import { MaterialModule } from './material/material.module';
 
+//providers
+
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,11 @@ import { MaterialModule } from './material/material.module';
     HttpClientModule,
   ],
   providers: [
-
+    {
+     provide: JWT_OPTIONS ,
+     useValue: JWT_OPTIONS
+    },
+    JwtHelperService
   ],
   bootstrap: [AppComponent]
 })

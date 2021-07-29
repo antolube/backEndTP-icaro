@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/userModel';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+
   private URL = 'http://localhost:3000/api/v1/'
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService
+    ) { }
+
 
 
 login(user_name: string, password: string){
@@ -19,5 +26,13 @@ login(user_name: string, password: string){
 register(user: User){
   return this.http.post(`${this.URL}safety/singup`,user);
 }
+
+  isAuth():boolean{
+    const token= localStorage.getItem('token');
+    if (this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')){
+      return false;
+    }
+    return true;
+  }
 
 }
