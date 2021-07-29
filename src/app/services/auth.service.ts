@@ -29,7 +29,7 @@ register(user: User){
 }
 
   isAuth():boolean{
-    const token= localStorage.getItem('token');
+    const token:any = localStorage.getItem('token');
     if (this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')){
       this.router.navigate(['singin'])
       return false;
