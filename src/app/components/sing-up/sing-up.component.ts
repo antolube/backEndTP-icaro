@@ -30,15 +30,15 @@ export class SingUpComponent implements OnInit {
   errorMessage = '';
 
   provinces: Province[] = [
-    {value: 'Cba-0', viewValue: 'Córdoba'},
-    {value: 'Sta.Fe-1', viewValue: 'Santa Fé'},
-    {value: 'Bs.As-2', viewValue: 'Buenos Aires'}
+    {value: '0', viewValue: 'Córdoba'},
+    {value: '1', viewValue: 'Santa Fé'},
+    {value: '2', viewValue: 'Buenos Aires'}
   ];
 
   countries: Country[] = [
-    {value: 'Arg', viewValue: 'Argentina'},
-    {value: 'Chi', viewValue: 'Chile'},
-    {value: 'Uru', viewValue: 'Ururguay'}
+    {value: '1', viewValue: 'Argentina'},
+    {value: '2', viewValue: 'Chile'},
+    {value: '3', viewValue: 'Ururguay'}
   ];
 
   constructor(
@@ -51,9 +51,9 @@ export class SingUpComponent implements OnInit {
     ) {
 
       this.register = this.fb.group({
-        username:['', Validators.required,],
+        user_name:['', Validators.required,],
         name:['', Validators.required,],
-        lastname:['', Validators.required],
+        last_name:['', Validators.required],
         password:['', Validators.required,],
         confirmPassword:['', Validators.required,],
         email:['', Validators.required],
@@ -82,17 +82,17 @@ export class SingUpComponent implements OnInit {
 
     console.log(user + "Se toma el registro");
 
-    this._authService.register(user).subscribe(
-      data => {
-        console.log(data);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
+    this._authService.register(user).subscribe((res:any) => {
+        console.log(res);
+        // this.isSuccessful = true;
+        // this.isSignUpFailed = false;
         console.log("se lo pasa al servico");
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isSignUpFailed = true;
-      });
+      }
+      // err => {
+      //   this.errorMessage = err.error.message;
+      //   this.isSignUpFailed = true;
+      // }
+      );
     // this._usuariosService.agregarUsuario(user);
     // this.fakelogin();
     // this.registroOk();
