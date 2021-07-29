@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/userModel';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
+import {Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private router: Router,
     ) { }
 
 
@@ -30,6 +31,7 @@ register(user: User){
   isAuth():boolean{
     const token= localStorage.getItem('token');
     if (this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')){
+      this.router.navigate(['singin'])
       return false;
     }
     return true;
