@@ -11,11 +11,9 @@ export class AuthGuard implements CanActivate {
 
   constructor (
     private authService: AuthService
+){}
 
-  ){}
-
-  canActivate(
-    ):boolean {
+  canActivate():boolean {
       if(!this.authService.isAuth()){
         console.log('token Expired')
         return false;

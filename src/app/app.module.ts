@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,8 +10,8 @@ import { SingUpComponent } from './components/sing-up/sing-up.component';
 import { MaterialModule } from './material/material.module';
 
 //providers
-
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
+import { TokenInterceptorService } from './services/token-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,11 +26,18 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
     HttpClientModule,
   ],
   providers: [
+    //jwt
     {
      provide: JWT_OPTIONS ,
      useValue: JWT_OPTIONS
     },
-    JwtHelperService
+    JwtHelperService,
+    //Interceptor
+    {
+      provide: HTTP_INTERCEPTORS ,
+      useClass: TokenInterceptorService,
+      multi: true
+     },
   ],
   bootstrap: [AppComponent]
 })
