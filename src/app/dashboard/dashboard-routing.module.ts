@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'dashboard', component:DashboardComponent , canActivate:[AuthGuard]},
   {path:'sent', component:SentMessageComponent, canActivate:[AuthGuard]},
   {path:'received', component:ReceivedMessageComponent, canActivate:[AuthGuard]},
-  {path:'new', component:NewMessageComponent, canActivate:[AuthGuard]}
+  {path:'new', component:NewMessageComponent, canActivate:[AuthGuard]},
   {path:'admin', component:NewMessageComponent, canActivate:[AuthGuard], data:{expectedRole :'admin'}}
 ];
 
