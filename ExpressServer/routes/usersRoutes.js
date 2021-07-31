@@ -8,9 +8,9 @@ const {required} = require('../middlewares/auth');
 //las rutas del usuario
 
 //acceso protejido con middlewares
-// router.get('/', (req, res) =>{
-//     routeController.handleRequest(req, res,userController.getAll)
-// })
+router.get('/diary', (req, res) =>{
+    routeController.handleRequest(req, res,messageController.getAllUsers)
+})
 router.get('/sentmsg', (req, res) =>{
     routeController.handleRequest(req, res,messageController.getAllMsgSenders)
 })

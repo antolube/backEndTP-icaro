@@ -1,6 +1,25 @@
 const MessageModel = require('../models/messageModel');
+const userModel = require('../models/userModel');
 // const error = require('../common/error');
 // const exception = require('../common/exception');
+
+const getAllService = async({user_name,id_user})=>{
+
+    console.log("getAllService - condition : "+user_name +""+id_user);
+    const where = {}
+    if (user_name){
+        where. user_name = user_name;
+    }
+    if (id_user){
+        where. id_user = id_user;
+    }
+
+    const usuarios = await userModel.findAll({attributes:['user_name','id_user'],
+    where:where});
+    // const usuarios = await userModel.findAll({condition,email})
+    console.log(" usuarios return :" +usuarios)
+    return usuarios;
+}
 
 const createMessage = async ({message,sender_id,recipient_id}) => {
     // const {message,sender_id,recipient_id} = data
@@ -54,6 +73,7 @@ const getAllMsgReceived = async({sender_id})=>{
 }
 
 module.exports = {
+    getAllService,
     createMessage,
     getAllMsgSenders,
     getAllMsgReceived

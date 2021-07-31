@@ -2,6 +2,24 @@ const messageServices = require("../services/messageServices")
 // const error = require('../common/error')
 // const exceptions = require('../common/exceptions')
 
+const getAllUsers = async (req,res)=>{
+    const query = req.query
+    console.log("get all controller - query : "+JSON.stringify(query))
+    // if(!req.query.condition){
+    //     throw new error.AppError(exceptions.exceptionType.productos.badRequest,"debe colocar un estado 0 ó 1")
+    // }
+    const filter = {
+        // condition: req.query.condition,
+        user_name: req.query.user_name,
+        id_user: req.query.id_user
+    }
+    // if(req.query.username){
+    //     filter.username = req.query.username
+    // }
+    //llamar al servicio de productos
+    const usuarios= await messageServices.getAllService(filter)
+    res.status(200).json(usuarios)
+}
 
 const createMessage = async (req,res) => {
     const data = req.body
@@ -54,6 +72,7 @@ const getAllMsgReceived = async (req,res)=>{
 }
 
 module.exports = {
+    getAllUsers,
     createMessage,
     getAllMsgSenders,
     getAllMsgReceived,
