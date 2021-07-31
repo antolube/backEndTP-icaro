@@ -10,10 +10,14 @@ const config = require('config');
 const apiPrefix = config.get('apiPrefix');
 const cors = require('cors');
 
+
+
 app.use(bodyParser.urlencoded({ extended: false}))
 
 app.use(bodyParser.json())
 //routes
+app.use(cors())
+
 
 app.use(apiPrefix + "/users",require("./routes/usersRoutes"))
 app.use(apiPrefix + "/safety",require("./routes/safetyRoutes"))
@@ -27,7 +31,7 @@ passport.use(passportConfig.createStrategy())
 app.use(passport.initialize())
 
 // Configurar cabeceras y cors
-app.use(cors())
+
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');
 //     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
