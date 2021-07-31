@@ -11,6 +11,12 @@ const {required} = require('../middlewares/auth');
 // router.get('/', (req, res) =>{
 //     routeController.handleRequest(req, res,userController.getAll)
 // })
+router.get('/sentmsg', (req, res) =>{
+    routeController.handleRequest(req, res,messageController.getAllMsgSenders)
+})
+router.get('/receivedmsg', (req, res) =>{
+    routeController.handleRequest(req, res,messageController.getAllMsgReceived)
+})
 // router.get('/:id',[required], (req, res) =>{
 //     routeController.handleRequest(req, res,userController.getById)
 // })
