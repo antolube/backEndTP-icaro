@@ -22,7 +22,11 @@ const getAllUsers = async (req,res)=>{
 }
 
 const createMessage = async (req,res) => {
-    const data = req.body
+    const data = {
+        sender_id: req.body.sender_id,
+        recipient_id: req.body.recipient_id,
+        message: req.body.message
+    }
     console.log("INIT CREATE Message  data:" + JSON.stringify(data))
     // if(!data.userName){
     //     console.log("no name in  CREATE USER  data:" + JSON.stringify(data))
