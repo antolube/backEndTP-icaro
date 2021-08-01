@@ -38,7 +38,7 @@ const getById = async (req,res)=>{
 const create = async (req,res) => {
     const data = req.body
     console.log("INIT CREATE USER  data:" + JSON.stringify(data))
-    if(data.user_name){
+    if(!data.user_name){
         console.log("no name in  CREATE USER  data:" + JSON.stringify(data))
         throw new error.AppError(exceptions.exceptionType.badRequest)
     }
