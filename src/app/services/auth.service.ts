@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../models/userModel';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Router } from '@angular/router';
-
+import decode from 'jwt-decode'
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +35,15 @@ register(user: User){
       return false;
     }
     return true;
+  }
+
+  userId(){
+    const token:any = localStorage.getItem('token');
+    const {id_user} = this.jwtHelper.decodeToken(token);
+    console.log(id_user);
+
+    return id_user;
+
   }
 
 }

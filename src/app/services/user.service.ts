@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Message } from '../models/messageModel';
+import { User } from '../models/userModel';
 
 
 @Injectable({
@@ -13,14 +14,18 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   sentMessage(){
-    return this.http.get(`${this.URL}safety/user/sent`);
+    return this.http.get<Message>(`${this.URL}users/sentmsg`);
   };
 
   receivedMessage(){
-    return this.http.get(`${this.URL}safety/user/received`);
+    return this.http.get<Message>(`${this.URL}users/receivedmsg`);
   }
   newMessage(message: Message){
-    return this.http.post(`${this.URL}safety/user/sent`,{message});
+    return this.http.post(`${this.URL}users/newmsg`,{message});
+  }
+
+  getDiary(){
+    return this.http.get<{user_name: string,id_user:number}>(`${this.URL}users/diary`);
   }
 
 

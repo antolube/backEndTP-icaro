@@ -7,6 +7,7 @@ import { ReceivedMessageComponent } from './received-message/received-message.co
 import { SentMessageComponent } from './sent-message/sent-message.component';
 
 const routes: Routes = [
+  {path:'', redirectTo:'dashboard', pathMatch:'full'},
   {path:'dashboard', component:DashboardComponent , canActivate:[AuthGuard]},
   {path:'sent', component:SentMessageComponent, canActivate:[AuthGuard]},
   {path:'received', component:ReceivedMessageComponent, canActivate:[AuthGuard]},
