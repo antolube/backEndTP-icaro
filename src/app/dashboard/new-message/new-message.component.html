@@ -8,7 +8,7 @@
           <mat-grid-tile [colspan]="3" [rowspan]="1">
             <mat-form-field color="accent" class="ancho">
               <mat-select formControlName="remitente" multiple>
-                <mat-option *ngFor="let diary of diary" [value]="diary.name">{{diary.user_name}} </mat-option>
+                <mat-option *ngFor="let diary of diary" [value]="diary.id_user">{{diary.user_name}}</mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>

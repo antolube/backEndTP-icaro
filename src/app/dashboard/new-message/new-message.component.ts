@@ -20,7 +20,11 @@ export class NewMessageComponent implements OnInit {
   form: FormGroup;
 
 
-  mensajes: any[] = [];
+  msg: Message= {
+    sender_id: 'string' ,
+    recipient_id:'string',
+    message:'string'
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -51,26 +55,24 @@ export class NewMessageComponent implements OnInit {
   //   this.usuarios = this._userService.getDiary();
   // }
 
-  SendMsj(){
+  SendMsj():void{
 
-    const mensajes : Message = {
+      this.msg= {
 
       sender_id: this._authService.userId(),
-      ricipient_id: this.form.value.remitente,
-      message:this.form.value.mensaje,
-
+      recipient_id: JSON.parse(this.form.value.remitente),
+      message:this.form.value.mensaje
     };
 
-
-    this._userService.newMessage(mensajes).subscribe((data)=>{
+    this._userService.newMessage(this.msg).subscribe((data)=>{
       console.log(JSON.stringify(data));
-    })
+    });
 
 
     this.fakeSend();
     // this.router.navigate(['/dashboard']);
     // this._interactionsService.nvoMsj(this.form.value.mensaje);
-    console.log("estoy enviando el mensaje:",this.mensajes);
+    console.log("estoy enviando el mensaje:"+JSON.stringify(this.msg));
 
   }
 

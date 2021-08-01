@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Message } from '../models/messageModel';
 import { User } from '../models/userModel';
 
@@ -20,8 +21,8 @@ export class UserService {
   receivedMessage(){
     return this.http.get<Message>(`${this.URL}users/receivedmsg`);
   }
-  newMessage(message: Message){
-    return this.http.post(`${this.URL}users/newmsg`,{message});
+  newMessage(msg: any){
+    return this.http.post(`${this.URL}users/newmsg`,msg);
   }
 
   getDiary(){

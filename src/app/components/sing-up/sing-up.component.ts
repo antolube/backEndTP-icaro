@@ -25,9 +25,6 @@ export class SingUpComponent implements OnInit {
   panelOpenState = false;
   hide = true;
   loading= false;
-  isSuccessful = false; //para implementar en formulario
-  isSignUpFailed = false; //para implementar en formulario
-  errorMessage = '';
 
   provinces: Province[] = [
     {value: '0', viewValue: 'Córdoba'},
