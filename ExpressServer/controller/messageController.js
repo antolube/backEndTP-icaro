@@ -41,20 +41,20 @@ const createMessage = async (req,res) => {
     return res.status(201).json(newMessage)
 }
 
-const getAllMsgSenders = async (req,res)=>{
+const getAllMsgSent = async (req,res)=>{
     const query = req.query
     console.log("get all msg sender controller - query : "+JSON.stringify(query))
-    // if(!req.query.condition){
-    //     throw new error.AppError(exceptions.exceptionType.productos.badRequest,"debe colocar un estado 0 ó 1")
-    // }
+    if(!req.query.id_user){
+        throw new error.AppError(exceptions.exceptionType.productos.badRequest,"Se debe ingresar id_user")
+    }
     const filter = {
-        recipient_id: req.query.recipient_id,
+        sender_id: req.query.id_user
     }
     // if(req.query.username){
     //     filter.username = req.query.username
     // }
     //llamar al servicio de productos
-    const message= await messageServices.getAllMsgSenders(filter)
+    const message= await messageServices.getAllMsgSent(filter)
     res.status(200).json(message)
 }
 
@@ -65,7 +65,7 @@ const getAllMsgReceived = async (req,res)=>{
     //     throw new error.AppError(exceptions.exceptionType.productos.badRequest,"debe colocar un estado 0 ó 1")
     // }
     const filter = {
-        sender_id: req.query.sender_id
+        recipient_id: req.query.id_user,
     }
     // if(req.query.username){
     //     filter.username = req.query.username
@@ -78,6 +78,6 @@ const getAllMsgReceived = async (req,res)=>{
 module.exports = {
     getAllUsers,
     createMessage,
-    getAllMsgSenders,
+    getAllMsgSent,
     getAllMsgReceived,
 }

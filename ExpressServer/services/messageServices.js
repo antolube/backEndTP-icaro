@@ -36,27 +36,9 @@ const createMessage = async ({message,sender_id,recipient_id}) => {
     return await MessageModel.create(data);
 }
 
-const getAllMsgSenders = async({recipient_id})=>{
+const getAllMsgSent = async({sender_id})=>{
 
-    console.log("getAllMsgSenders - condition : "+recipient_id)
-    const where = {}
-    if (recipient_id){
-        where. recipient_id =  recipient_id;
-    }
-    // if (email){
-    //     where.email = email;
-    // }
-
-    const message = await MessageModel.findAll({atributes:['recipient_id'],
-    where:where});
-    // const usuarios = await userModel.findAll({condition,email})
-    console.log(" message return :" +message)
-    return message;
-}
-
-const getAllMsgReceived = async({sender_id})=>{
-
-    console.log("get All Msg Received - condition : "+sender_id)
+    console.log("getAllMsgSenders - condition : "+sender_id)
     const where = {}
     if (sender_id){
         where. sender_id =  sender_id;
@@ -65,7 +47,25 @@ const getAllMsgReceived = async({sender_id})=>{
     //     where.email = email;
     // }
 
-    const message = await MessageModel.findAll({atributes:['sender_id'],
+    const messages = await MessageModel.findAll({atributes:['sender_id'],
+    where:where});
+    // const usuarios = await userModel.findAll({condition,email})
+    console.log(" message return :" +messages)
+    return messages;
+}
+
+const getAllMsgReceived = async({recipient_id})=>{
+
+    console.log("get All Msg Received - condition exceptions id_user: "+recipient_id)
+    const where = {}
+    if (recipient_id){
+        where. recipient_id = recipient_id;
+    }
+    // if (email){
+    //     where.email = email;
+    // }
+
+    const message = await MessageModel.findAll({atributes:['recipient_id',],
     where:where});
     // const usuarios = await userModel.findAll({condition,email})
     console.log(" message return :" +message)
@@ -75,6 +75,6 @@ const getAllMsgReceived = async({sender_id})=>{
 module.exports = {
     getAllService,
     createMessage,
-    getAllMsgSenders,
+    getAllMsgSent,
     getAllMsgReceived
 }

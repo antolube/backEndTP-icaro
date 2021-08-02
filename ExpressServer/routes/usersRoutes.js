@@ -12,7 +12,7 @@ router.get('/diary', (req, res) =>{
     routeController.handleRequest(req, res,messageController.getAllUsers)
 })
 router.get('/sentmsg', (req, res) =>{
-    routeController.handleRequest(req, res,messageController.getAllMsgSenders)
+    routeController.handleRequest(req, res,messageController.getAllMsgSent)
 })
 router.get('/receivedmsg', (req, res) =>{
     routeController.handleRequest(req, res,messageController.getAllMsgReceived)
