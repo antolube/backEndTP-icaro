@@ -4,7 +4,7 @@ const messageServices = require("../services/messageServices")
 
 const getAllUsers = async (req,res)=>{
     const query = req.query
-    console.log("get all controller - query : "+JSON.stringify(query))
+    console.log("gET All User Diary - query : "+JSON.stringify(query))
     // if(!req.query.condition){
     //     throw new error.AppError(exceptions.exceptionType.productos.badRequest,"debe colocar un estado 0 ó 1")
     // }
@@ -43,8 +43,8 @@ const createMessage = async (req,res) => {
 
 const getAllMsgSent = async (req,res)=>{
     const query = req.query
-    console.log("get all msg sender controller - query : "+JSON.stringify(query))
-    if(!req.query.id_user){
+    console.log("get All Msg Sent Controller - query : "+JSON.stringify(query))
+    if(!req.query){
         throw new error.AppError(exceptions.exceptionType.productos.badRequest,"Se debe ingresar id_user")
     }
     const filter = {
@@ -70,6 +70,7 @@ const getAllMsgReceived = async (req,res)=>{
     // if(req.query.username){
     //     filter.username = req.query.username
     // }
+    // return console.log(filter);
     //llamar al servicio de productos
     const message= await messageServices.getAllMsgReceived(filter)
     res.status(200).json(message)
