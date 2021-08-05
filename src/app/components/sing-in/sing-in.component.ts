@@ -39,7 +39,7 @@ export class SingInComponent implements OnInit {
 
     this._authService.login(user_name, password).subscribe( (data:any) =>{
       console.log(data);
-      localStorage.setItem('token',data.token);
+      window.sessionStorage.setItem('token',data.token);
       this.router.navigate(['/dashboard'])
     });
   }

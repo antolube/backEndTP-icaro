@@ -12,11 +12,15 @@ import { MaterialModule } from './material/material.module';
 //providers
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { NavComponent } from './shared/nav/nav.component';
+import { FooterComponent } from './shared/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     SingInComponent,
-    SingUpComponent
+    SingUpComponent,
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

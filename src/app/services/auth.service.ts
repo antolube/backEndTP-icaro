@@ -29,21 +29,39 @@ register(user: User){
 }
 
   isAuth():boolean{
-    const token:any = localStorage.getItem('token');
-    if (this.jwtHelper.isTokenExpired(token) || !localStorage.getItem('token')){
+    const token:any = window.sessionStorage.getItem('token');
+    if (this.jwtHelper.isTokenExpired(token) || !window.sessionStorage.getItem('token')){
       this.router.navigate(['singin'])
       return false;
     }
     return true;
+
   }
 
   userId(){
-    const token:any = localStorage.getItem('token');
-    const {id_user} = this.jwtHelper.decodeToken(token);
-    console.log(id_user);
-
-    return id_user;
-
+    if( this.isAuth() === true){
+      const token:any = window.sessionStorage.getItem('token');
+      const {id_user} = this.jwtHelper.decodeToken(token);
+      console.log(id_user);
+      return id_user;
+    }
+  }
+  user_name(){
+    if( this.isAuth() === true){
+    const token:any = window.sessionStorage.getItem('token');
+    const {user_name} = this.jwtHelper.decodeToken(token);
+    console.log(user_name);
+    return user_name;
+    }
   }
 
+  signOut(){
+    window.sessionStorage.clear();
+    window.sessionStorage.removeItem('token');
+    window.sessionStorage.removeItem('tokenHeader');
+    window.sessionStorage.removeItem('id_user');
+    window.sessionStorage.removeItem('user_name');
+    window.sessionStorage.reload();
+    console.log("esoty removiendo estos datos:"+`${this.userId,this.user_name}`);
+    }
 }

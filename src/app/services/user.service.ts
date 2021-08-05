@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Message } from '../models/messageModel';
 import { User } from '../models/userModel';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -10,16 +11,22 @@ import { User } from '../models/userModel';
 })
 export class UserService {
 
-  private URL = 'http://localhost:3000/api/v1/'
+  private URL = 'http://localhost:3000/api/v1/';
+  private ID = this._authService.userId();
 
-  constructor(private http: HttpClient) { }
 
-  sentMessage(){
-    return this.http.get<Message>(`${this.URL}users/sentmsg`);
-  };
+  constructor(
+    private http: HttpClient,
+    private _authService: AuthService
+    ) { }
 
-  receivedMessage(){
-    return this.http.get<Message>(`${this.URL}users/receivedmsg`);
+    sentMessage(){
+      return this.http.get(`${this.URL}users/sentmsg?id_user=${this.ID}`);
+    };
+
+    receivedMessage(){
+      console.log("estoy enviando este dato ala base datos:"+JSON.parse(this.ID));
+      return this.http.get(`${this.URL}users/receivedmsg?id_user=${this.ID}`);
   }
   newMessage(msg: any){
     return this.http.post(`${this.URL}users/newmsg`,msg);
@@ -28,6 +35,7 @@ export class UserService {
   getDiary(){
     return this.http.get<{user_name: string,id_user:number}>(`${this.URL}users/diary`);
   }
+
 
 
 }

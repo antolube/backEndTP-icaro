@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-sent-message',
   templateUrl: './sent-message.component.html',
@@ -7,28 +8,30 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class SentMessageComponent implements OnInit {
 
-  mensajesEnviados: any [] = [];
-
+  msg: any =[];
 
   displayedColumns: string[] = ['remitente', 'fecha', 'mensaje', 'acciones'];
 
   dataSource!:MatTableDataSource<any>;
 
-  constructor() { }
+  constructor(private _userService: UserService,) { }
 
   ngOnInit(): void {
+    this._userService.sentMessage().subscribe(data =>{
+    console.log(JSON.stringify(data));
+    this.msg = data;
+    this.dataSource =  new MatTableDataSource(this.msg);
+    });
+
   }
 
-  // cargarMensajesEnviados(){
+  cargarMensajes(){
+  }
 
-  //   this.mensajesEnviados = this._sendService.getMensajesEnviados();
-  //   this.dataSource = new MatTableDataSource(this.mensajesEnviados);
-  //   // this.recargar();
-  // }
-
-  // eliminarMensaje(index: number){
-  //   this._sendService.eliminarMensaje(index);
-  //   this.cargarMensajesEnviados();
-  // }
+  eliminarMensaje(index: number){
+    // this._messagesService.eliminarMensaje(index);
+    // console.log(index);
+    this.cargarMensajes();
+  }
 
 }

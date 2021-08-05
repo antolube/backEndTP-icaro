@@ -23,7 +23,8 @@ export class NewMessageComponent implements OnInit {
   msg: Message= {
     sender_id: 'string' ,
     recipient_id:'string',
-    message:'string'
+    message:'string',
+    create_at:'string',
   };
 
   constructor(
@@ -42,11 +43,10 @@ export class NewMessageComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    // console.log(this._userService.getDiary())
       this._userService.getDiary().subscribe((data) => {
-      // console.log(data);
+      console.log("estos son los contactos para el diary: "+JSON.stringify(data));
       this.diary = data;
-      console.log(this.diary)
+      // console.log(this.diary)
     });
     this._authService.userId();
   }
@@ -61,7 +61,8 @@ export class NewMessageComponent implements OnInit {
 
       sender_id: this._authService.userId(),
       recipient_id: JSON.parse(this.form.value.remitente),
-      message:this.form.value.mensaje
+      message:this.form.value.mensaje,
+      create_at: '',
     };
 
     this._userService.newMessage(this.msg).subscribe((data)=>{
@@ -70,7 +71,7 @@ export class NewMessageComponent implements OnInit {
 
 
     this.fakeSend();
-    // this.router.navigate(['/dashboard']);
+    this.router.navigate(['/dashboard/received']);
     // this._interactionsService.nvoMsj(this.form.value.mensaje);
     console.log("estoy enviando el mensaje:"+JSON.stringify(this.msg));
 
