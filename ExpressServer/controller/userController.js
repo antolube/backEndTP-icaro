@@ -58,6 +58,8 @@ const login = async (req, res) => {
     res.json(userInfo)
 }
 
+// exports.logout = async (req, res) =>{
+//     req.session.destroy }; 
 // const updated = async (req,res)=>{
 //     const data = req.body
 //     const params = req.params

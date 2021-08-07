@@ -28,7 +28,7 @@ const createMessage = async ({message,sender_id,recipient_id}) => {
         message: message,
         sender_id: sender_id,
         recipient_id:recipient_id,
-        created_at: new Date(),
+        created_at: Date(),
     }
 
     console.log("create Message:"+ JSON.stringify(data));
