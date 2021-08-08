@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanActivate {
 
   constructor (
-    private authService: AuthService
+    private authService: AuthService,
+    private _tokenStorage: TokenStorageService
 ){}
 
   canActivate():boolean {
-      if(!this.authService.isAuth()){
+      if(!this._tokenStorage.isAuth()){
         console.log('token Expired')
         return false;
       }

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { TokenInterceptorService } from 'src/app/services/token-interceptor.service';
-import { UserService } from 'src/app/services/user.service';
-
+// import { AuthService } from 'src/app/services/auth.service';
+// import { TokenInterceptorService } from 'src/app/services/token-interceptor.service';
+// import { UserService } from 'src/app/services/user.service';
+// import { Router} from '@angular/router';
+import { TokenStorageService} from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -10,37 +11,30 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavComponent implements OnInit {
 
-  usuarioMostrar: any = [];
-  login: boolean = false;
+  isLoggedIn = false;
+  user_name:any ="";
 
   constructor(
-    private _authService: AuthService,
-    private _userService: UserService,
-    private _tokenInterceptorService: TokenInterceptorService,
+
+    private _tokenStorage: TokenStorageService
+
   ) { }
 
   ngOnInit(): void {
-    this.usuarioMostrar = this._authService.user_name().subscribe((data:any) => {
-      console.log("Estoy recibiendo este usuario:" + JSON.stringify(data));
-    });
-  }
-
-  userlogin(){
-    // console.log(this.usuarioMostrar);
-    if(this.usuarioMostrar.length > 0){
-      return this.login = true;
-    }else{
-      return false;
+    this.isLoggedIn = !!this._tokenStorage.getToken();
+    if (this.isLoggedIn) {
+      const user = this._tokenStorage.username();
+      this.user_name = user;
     }
   }
 
 
-  logout(){
-    // this._authService.signOut().subscribe((data:any) =>{
+  logOut(): void {
+    this._tokenStorage.singOut();
+    window.location.reload();
 
-    // })
-    // window.location.reload(),
-    // localStorage.removeItem('login')
-}
+  }
 
 }
+
+

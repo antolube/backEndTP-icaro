@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { User } from '../models/userModel';
+import {Observable} from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Router } from '@angular/router';
-import decode from 'jwt-decode'
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -20,17 +25,23 @@ export class AuthService {
 
 
 
-login(user_name: string, password: string){
-  return this.http.post(`${this.URL}safety/singin`,{user_name,password});
+login(user_name: string, password: string):Observable<any>{
+  return this.http.post(`${this.URL}safety/singin`,{
+    user_name,
+    password
+  },httpOptions);
 }
 
-register(user: User){
-  return this.http.post(`${this.URL}safety/singup`,user);
+register(user: User):Observable<any>{
+  return this.http.post(`${this.URL}safety/singup`,
+  user,
+  httpOptions);
 }
+
 
   isAuth():boolean{
-    const token:any = window.sessionStorage.getItem('token');
-    if (this.jwtHelper.isTokenExpired(token) || !window.sessionStorage.getItem('token')){
+    const token:any = window.sessionStorage.getItem('tokenOK');
+    if (this.jwtHelper.isTokenExpired(token) || !window.sessionStorage.getItem('tokenOK')){
       this.router.navigate(['singin'])
       return false;
     }
@@ -40,28 +51,25 @@ register(user: User){
 
   userId(){
     if( this.isAuth() === true){
-      const token:any = window.sessionStorage.getItem('token');
+      const token:any = window.sessionStorage.getItem('tokenOK');
       const {id_user} = this.jwtHelper.decodeToken(token);
       console.log(id_user);
       return id_user;
     }
   }
-  user_name(){
+  username(){
     if( this.isAuth() === true){
-    const token:any = window.sessionStorage.getItem('token');
+    const token:any = window.sessionStorage.getItem('tokenOK');
     const {user_name} = this.jwtHelper.decodeToken(token);
     console.log(user_name);
     return user_name;
     }
   }
 
-  signOut(){
-    window.sessionStorage.clear();
-    window.sessionStorage.removeItem('token');
-    window.sessionStorage.removeItem('tokenHeader');
-    window.sessionStorage.removeItem('id_user');
-    window.sessionStorage.removeItem('user_name');
-    window.sessionStorage.reload();
-    console.log("esoty removiendo estos datos:"+`${this.userId,this.user_name}`);
-    }
+  // singOut(){
+  //     localStorage.removeItem('id_user');
+  //     localStorage.removeItem('user_name');
+  //     console.log(localStorage.removeItem('id_user,user_name'));
+  // }
+
 }

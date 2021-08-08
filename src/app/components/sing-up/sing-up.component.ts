@@ -25,6 +25,9 @@ export class SingUpComponent implements OnInit {
   panelOpenState = false;
   hide = true;
   loading= false;
+  // isSuccessful = false;
+  // isSignUpFailed = false;
+  errorMessage = '';
 
   provinces: Province[] = [
     {value: '0', viewValue: 'Córdoba'},
@@ -84,11 +87,11 @@ export class SingUpComponent implements OnInit {
         // this.isSuccessful = true;
         // this.isSignUpFailed = false;
         console.log("se lo pasa al servico");
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        // this.isSignUpFailed = true;
       }
-      // err => {
-      //   this.errorMessage = err.error.message;
-      //   this.isSignUpFailed = true;
-      // }
       );
     // this._usuariosService.agregarUsuario(user);
     // this.fakelogin();

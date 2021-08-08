@@ -71,7 +71,7 @@ export class NewMessageComponent implements OnInit {
 
 
     this.fakeSend();
-    this.router.navigate(['/dashboard/received']);
+    this.router.navigate(['/dashboard'])
     // this._interactionsService.nvoMsj(this.form.value.mensaje);
     console.log("estoy enviando el mensaje:"+JSON.stringify(this.msg));
 
@@ -80,6 +80,7 @@ export class NewMessageComponent implements OnInit {
   fakeSend(){
     this.loading= true;
     this.form.reset();
+    this.reloadPage();
     setTimeout(()=>{
       //redirecccionamos al al escritorio
       this._snackbar.open('Mensaje Enviado','',
@@ -94,8 +95,8 @@ export class NewMessageComponent implements OnInit {
     );
   }
 
-  infoNewMsj(){
-
+  reloadPage(): void {
+    window.location.reload();
   }
 
 }
