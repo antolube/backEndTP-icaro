@@ -30,6 +30,16 @@ const MessageModel = sequelizeConnection.define(
         created_at: {
             type: Sequelize.DATE,
             field: 'created_at'
+        },
+        received_deleted:{
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            field: 'received_deleted',
+        },
+        sent_deleted:{
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            field: 'sent_deleted',
         }
     },
     {
