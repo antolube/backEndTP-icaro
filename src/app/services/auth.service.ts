@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { User } from '../models/userModel';
 import {Observable} from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import {Router } from '@angular/router';
+
 
 
 const httpOptions = {
@@ -19,8 +18,6 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelperService,
-    private router: Router,
     ) { }
 
 
@@ -37,39 +34,5 @@ register(user: User):Observable<any>{
   user,
   httpOptions);
 }
-
-
-  isAuth():boolean{
-    const token:any = window.sessionStorage.getItem('tokenOK');
-    if (this.jwtHelper.isTokenExpired(token) || !window.sessionStorage.getItem('tokenOK')){
-      this.router.navigate(['singin'])
-      return false;
-    }
-    return true;
-
-  }
-
-  userId(){
-    if( this.isAuth() === true){
-      const token:any = window.sessionStorage.getItem('tokenOK');
-      const {id_user} = this.jwtHelper.decodeToken(token);
-      console.log(id_user);
-      return id_user;
-    }
-  }
-  username(){
-    if( this.isAuth() === true){
-    const token:any = window.sessionStorage.getItem('tokenOK');
-    const {user_name} = this.jwtHelper.decodeToken(token);
-    console.log(user_name);
-    return user_name;
-    }
-  }
-
-  // singOut(){
-  //     localStorage.removeItem('id_user');
-  //     localStorage.removeItem('user_name');
-  //     console.log(localStorage.removeItem('id_user,user_name'));
-  // }
 
 }

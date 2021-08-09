@@ -1,15 +1,14 @@
 <div class="header">
   <mat-toolbar style="justify-content: space-between;">
     <span>My App </span>
-    <div class="title" style="justify-content: space-between;display: flex;gap: 20px;">
-      <h1 *ngIf='isLoggedIn'>Hola : {{user_name }}</h1>
+    <div *ngIf="isLoggedIn" class="title" style="justify-content: space-between;display: flex;gap: 20px;">
+      <h1 >Hola : {{user_name}}</h1>
       <button type="submit"  mat-icon-button class="btn"
       mat-raised-button #tooltip="matTooltip"
       matTooltip="Log Out"
       matTooltipPosition="right"
       aria-tooltip="Button that displays and hides a tooltip triggered by other"
-      (click)="logOut()"
-      *ngIf='isLoggedIn'>
+      (click)="logOut()">
       <mat-icon>logout</mat-icon>
       </button >
     </div>

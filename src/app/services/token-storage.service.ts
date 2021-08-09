@@ -3,8 +3,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 
 
-const TOKEN_KEY ='tokenOK';
-// const USER_KEY ='safety-user_name';
+
+const TOKEN_KEY ='token';
+const USER_KEY ='user_name';
 // const USER_ID_KEY ='safety-id_user';
 @Injectable({
   providedIn: 'root'
@@ -21,19 +22,23 @@ export class TokenStorageService {
     window.sessionStorage.clear();
   }
   public saveToken(token: string): void {
-    console.log("Saving token")
+    console.log("Saving token:"+JSON.stringify(token))
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY,token);
   }
 
   public getToken(): string | null {
-    console.log("estoy tomando el token:" + TOKEN_KEY);
     return window.sessionStorage.getItem(TOKEN_KEY);
+  }
+  public saveUser(user_name: any): void {
+    console.log('Saving user:'+JSON.stringify(user_name));
+    window.sessionStorage.removeItem(USER_KEY);
+    window.sessionStorage.setItem(USER_KEY, JSON.stringify(user_name));
   }
 
   isAuth():boolean{
-    const token:any = window.sessionStorage.getItem('tokenOK');
-    if (this.jwtHelper.isTokenExpired(token) || !window.sessionStorage.getItem('tokenOK')){
+    const token:any = this.getToken()
+    if (this.jwtHelper.isTokenExpired(token) || !this.getToken()){
       this.router.navigate(['singin'])
       return false;
     }
@@ -43,7 +48,7 @@ export class TokenStorageService {
 
   userId(){
     if( this.isAuth() === true){
-      const token:any = window.sessionStorage.getItem('tokenOK');
+      const token:any = this.getToken();
       const {id_user} = this.jwtHelper.decodeToken(token);
       console.log(id_user);
       return id_user;
@@ -51,18 +56,23 @@ export class TokenStorageService {
   }
   username(){
     if( this.isAuth() === true){
-    const token:any = window.sessionStorage.getItem('tokenOK');
+    const token:any = this.getToken();
     const {user_name} = this.jwtHelper.decodeToken(token);
     console.log(user_name);
     return user_name;
     }
   }
 
+  isLoggedIn():boolean{
+    const token:any = this.getToken()
+    if (this.jwtHelper.isTokenExpired(token) || !this.getToken()){
+    this.router.navigate(['singin'])
+    return false;
+    }
+    return true;
+  }
 
-  // public saveUser(user_name: any): void {
-  //   window.sessionStorage.removeItem(USER_KEY);
-  //   window.sessionStorage.setItem(USER_KEY, JSON.stringify(user_name));
-  // }
+
 
   // public getUser(): any {
   //   const user = window.sessionStorage.getItem(USER_KEY);

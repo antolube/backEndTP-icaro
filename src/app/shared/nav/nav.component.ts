@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 // import { AuthService } from 'src/app/services/auth.service';
 // import { TokenInterceptorService } from 'src/app/services/token-interceptor.service';
 // import { UserService } from 'src/app/services/user.service';
@@ -11,23 +12,25 @@ import { TokenStorageService} from 'src/app/services/token-storage.service';
 })
 export class NavComponent implements OnInit {
 
-  isLoggedIn = false;
-  user_name:any ="";
+  isLoggedIn =false;
+  user_name?:string;
 
   constructor(
 
-    private _tokenStorage: TokenStorageService
+    private _tokenStorage: TokenStorageService,
+    private _authService: AuthService,
+
 
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit():void{
     this.isLoggedIn = !!this._tokenStorage.getToken();
-    if (this.isLoggedIn) {
+    console.log("isLoggedIn: "+this.isLoggedIn)
+    if (this.isLoggedIn){
       const user = this._tokenStorage.username();
       this.user_name = user;
     }
   }
-
 
   logOut(): void {
     this._tokenStorage.singOut();

@@ -1,23 +1,20 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Message } from '../models/messageModel';
-import { User } from '../models/userModel';
-import { AuthService } from './auth.service';
 import { TokenStorageService } from './token-storage.service';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
+
   private URL = 'http://localhost:3000/api/v1/';
-  // private ID = this._authService.userId();
   private ID = this._tokenStorage.userId();
 
   constructor(
     private http: HttpClient,
-    // private _authService: AuthService
     private _tokenStorage: TokenStorageService,
   ) { }
   sentMessage(){

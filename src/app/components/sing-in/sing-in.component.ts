@@ -34,7 +34,9 @@ export class SingInComponent implements OnInit {
       password:['', Validators.required]
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   // ingresar(){
   //     const user_name = this.form.value.usuario;
@@ -54,34 +56,17 @@ export class SingInComponent implements OnInit {
     const password = this.form.value.password;
 
     this._authService.login(user_name, password).subscribe(
-      data => {
+      data=> {
         this._tokenStorage.saveToken(data.token);
-        // this._tokenStorage.saveUser(data.user_name);
-        // this._tokenStorage.
-        // this.isLoginFailed = false;
-        // this.isLoggedIn = true;
-        // this.roles = this.tokenStorage.getUser().roles;
+        this._tokenStorage.saveUser(data);
         this.fakelogin();
-        // this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;
-        // this.isLoginFailed = true;
         this.error();
         this.form.reset();
       }
     );
-
-  //   // if(usuario == "antonio" && password == "a" ){
-  //   //   //redireccionamos al escritorio de usuario
-  //   //   this.fakelogin();
-  //   //   // this.usuarioLogeado();
-  //   //   // this.comunicoUsuario();
-  //   // }else{
-  //   //   //mostrar mensaje de error
-  //   //   this.error();
-  //   //   this.form.reset();
-  //   // }
   }
 
   error(){
@@ -93,17 +78,17 @@ export class SingInComponent implements OnInit {
         }
     );
   }
-  reloadPage(): void {
-    window.location.reload();
-  }
 
   fakelogin(){
     this.loading= true;
     setTimeout(()=>{
       //redirecccionamos al al escritorio
-      // this.loading= false;
       this.router.navigate(['/dashboard'])
     },1500
     );
+  }
+
+  reloadPage(): void {
+    window.location.reload();
   }
 }

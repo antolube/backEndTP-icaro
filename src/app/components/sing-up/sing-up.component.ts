@@ -94,8 +94,8 @@ export class SingUpComponent implements OnInit {
       }
       );
     // this._usuariosService.agregarUsuario(user);
-    // this.fakelogin();
-    // this.registroOk();
+    this.fakelogin();
+    this.registroOk();
     // this.comunicoUsuario();
 
 

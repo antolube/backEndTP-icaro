@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/userModel';
 import { Message } from 'src/app/models/messageModel';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
   selector: 'app-new-message',
@@ -33,6 +34,7 @@ export class NewMessageComponent implements OnInit {
     private _snackbar: MatSnackBar,
     private _userService: UserService,
     private _authService: AuthService,
+    private _tokenStorage: TokenStorageService,
   )
   {
       this.form = this.fb.group({
@@ -48,7 +50,7 @@ export class NewMessageComponent implements OnInit {
       this.diary = data;
       // console.log(this.diary)
     });
-    this._authService.userId();
+    this._tokenStorage.userId();
   }
 
   // getTraerUsuarios(){
@@ -59,7 +61,7 @@ export class NewMessageComponent implements OnInit {
 
       this.msg= {
 
-      sender_id: this._authService.userId(),
+      sender_id: this._tokenStorage.userId(),
       recipient_id: JSON.parse(this.form.value.remitente),
       message:this.form.value.mensaje,
       create_at: '',

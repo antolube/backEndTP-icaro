@@ -11,7 +11,6 @@ import { TokenStorageService } from '../services/token-storage.service';
 export class AuthGuard implements CanActivate {
 
   constructor (
-    private authService: AuthService,
     private _tokenStorage: TokenStorageService
 ){}
 
