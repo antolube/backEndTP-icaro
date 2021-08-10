@@ -23,6 +23,7 @@ export class NewMessageComponent implements OnInit {
 
   msg: Message= {
     sender_id: 'string' ,
+    sender_name: '',
     recipient_id:'string',
     message:'string',
     create_at:'string',
@@ -51,6 +52,8 @@ export class NewMessageComponent implements OnInit {
       // console.log(this.diary)
     });
     this._tokenStorage.userId();
+    this._tokenStorage.username();
+    console.log(JSON.stringify(this._tokenStorage.username()))
   }
 
   // getTraerUsuarios(){
@@ -62,6 +65,7 @@ export class NewMessageComponent implements OnInit {
       this.msg= {
 
       sender_id: this._tokenStorage.userId(),
+      sender_name:this._tokenStorage.username(),
       recipient_id: JSON.parse(this.form.value.remitente),
       message:this.form.value.mensaje,
       create_at: '',
