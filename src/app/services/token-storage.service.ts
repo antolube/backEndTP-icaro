@@ -62,6 +62,14 @@ export class TokenStorageService {
     return user_name;
     }
   }
+  userEmail(){
+    if( this.isAuth() === true){
+    const token:any = this.getToken();
+    const {email} = this.jwtHelper.decodeToken(token);
+    console.log(email);
+    return email;
+    }
+  }
 
   isLoggedIn():boolean{
     const token:any = this.getToken()

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UserService } from 'src/app/services/user.service';
+// import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-sent-message',
   templateUrl: './sent-message.component.html',
@@ -8,21 +9,23 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SentMessageComponent implements OnInit {
 
+
   msg: any =[];
 
   displayedColumns: string[] = ['remitente', 'fecha', 'mensaje', 'acciones'];
 
   dataSource!:MatTableDataSource<any>;
 
+
   constructor(private _userService: UserService,) { }
+
 
   ngOnInit(): void {
     this._userService.sentMessage().subscribe(data =>{
-    console.log(JSON.stringify(data));
-    this.msg = data;
-    this.dataSource =  new MatTableDataSource(this.msg);
+      console.log(JSON.stringify(data));
+      this.msg = data;
+      this.dataSource =  new MatTableDataSource(this.msg);
     });
-
   }
 
   cargarMensajes(){

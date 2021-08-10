@@ -15,6 +15,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const materialModules = [
   MatToolbarModule,
@@ -31,7 +32,8 @@ const materialModules = [
   MatCardModule,
   MatTabsModule,
   MatTableModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatPaginatorModule
 
   ];
 

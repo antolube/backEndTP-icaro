@@ -12,6 +12,7 @@ export class UserService {
 
   private URL = 'http://localhost:3000/api/v1/';
   private ID = this._tokenStorage.userId();
+  private EMAIL = this._tokenStorage.userEmail();
 
   constructor(
     private http: HttpClient,
