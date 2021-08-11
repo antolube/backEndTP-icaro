@@ -22,24 +22,24 @@ const MessageModel = sequelizeConnection.define(
             allowNull: false,
             field: 'sender_id',
         },
+        sender_name:{
+            type: Sequelize.STRING,
+            allowNull: true,
+            field: 'sender_name',
+        },
         recipient_id:{
             type: Sequelize.INTEGER,
             allowNull: false,
             field: 'recipient_id',
         },
+        recipient_name:{
+            type: Sequelize.STRING,
+            allowNull: true,
+            field: 'recipient_name',
+        },
         created_at: {
             type: Sequelize.DATE,
             field: 'created_at'
-        },
-        received_deleted:{
-            type: Sequelize.INTEGER,
-            allowNull: true,
-            field: 'received_deleted',
-        },
-        sent_deleted:{
-            type: Sequelize.INTEGER,
-            allowNull: true,
-            field: 'sent_deleted',
         }
     },
     {

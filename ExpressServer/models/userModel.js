@@ -50,18 +50,18 @@ const  UserModel = sequelizeConnection.define(
     //     allowNull: false,
     //     fields: 'condition'
     // },
-    createdAt: {
-        type: Sequelize.DATE,
-        field: 'created_at'
-      },
-      updatedAt: {
-        type: Sequelize.DATE,
-        field: 'updated_at'
-      }
+    // createdAt: {
+    //     type: Sequelize.DATE,
+    //     field: 'created_at'
+    //   },
+    //   updatedAt: {
+    //     type: Sequelize.DATE,
+    //     field: 'updated_at'
+    //   }
 },
 {
     tableName:'users',
-    timestamps: true
+    timestamps: false,
 }
 )
 

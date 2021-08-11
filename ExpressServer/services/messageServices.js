@@ -14,20 +14,30 @@ const getAllService = async({user_name,id_user})=>{
         where. id_user = id_user;
     }
 
-    const usuarios = await userModel.findAll({attributes:['user_name','id_user'],
+    const usuarios = await userModel.findAll({attributes:['user_name','id_user','email'],
     where:where});
     // const usuarios = await userModel.findAll({condition,email})
     console.log(" User Diary return :" +JSON.stringify(usuarios));
     return usuarios;
 }
 
-const createMessage = async ({message,sender_id,recipient_id}) => {
+const createMessage = async ({message,sender_id,sender_name,recipient_id,recipient_name}) => {
     // const {message,sender_id,recipient_id} = data
-    console.log("Create Message:"+ JSON.stringify({message,sender_id,recipient_id }));
+    console.log("Create Message:"+ JSON.stringify({message,sender_id,sender_name,recipient_id,recipient_name}));
+    // const filter= {
+    //         user_name:recipient_id,
+    //     }
+    const where = {}
+    if (recipient_id){
+        where. id_user =  recipient_id;
+    }
+    
     const data = {
         message: message,
         sender_id: sender_id,
+        sender_name: sender_name,
         recipient_id:recipient_id,
+        recipient_name: JSON.stringify(await userModel.findOne({attributes:['user_name'],where:where})),
         created_at: Date(),
     }
 

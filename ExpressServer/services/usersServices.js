@@ -42,7 +42,7 @@ if(emailExist){
       console.error("createUser - user_name["+ user_name+"]");
       throw new error.AppError(exceptions.exceptionType.database.entity.canNotBeCreated, errorMessage)
     }
-  }
+}
 
   const encryptPassword = userPassword => {
     const salt = bcrypt.genSaltSync()

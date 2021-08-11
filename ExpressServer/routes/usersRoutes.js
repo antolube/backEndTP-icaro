@@ -17,15 +17,15 @@ router.get('/sentmsg', (req, res) =>{
 router.get('/receivedmsg', (req, res) =>{
     routeController.handleRequest(req, res,messageController.getAllMsgReceived)
 })
-// router.get('/:id',[required], (req, res) =>{
+// router.get('/:id', (req, res) =>{
 //     routeController.handleRequest(req, res,userController.getById)
 // })
 router.post('/newmsg', (req, res) =>{
     routeController.handleRequest(req, res,messageController.createMessage)
 })
-// router.patch('/:id',[required], (req, res) =>{
-//     routeController.handleRequest(req, res,userController.updated)
-// })
+router.patch('/:id', (req, res) =>{
+    routeController.handleRequest(req, res,userController.updated)
+})
 
 // router.delete('/:id',[required], (req, res) =>{
 //     routeController.handleRequest(req, res,userController.deleted)

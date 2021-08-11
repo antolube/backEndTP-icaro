@@ -1,4 +1,5 @@
 const messageServices = require("../services/messageServices")
+const userModel = require('../models/userModel');
 // const error = require('../common/error')
 // const exceptions = require('../common/exceptions')
 
@@ -22,9 +23,17 @@ const getAllUsers = async (req,res)=>{
 }
 
 const createMessage = async (req,res) => {
+    
+    // const filter= {
+    //     user_name: req.body.recipient_id,
+    // },
+    // const recipient_name =  await userModel.findByPk(filter);
+
     const data = {
         sender_id: req.body.sender_id,
+        sender_name: req.body.sender_name,
         recipient_id: req.body.recipient_id,
+        recipient_name: req.recipient_id,
         message: req.body.message
     }
     console.log("INIT CREATE Message  data:" + JSON.stringify(data))
@@ -47,6 +56,8 @@ const getAllMsgSent = async (req,res)=>{
     if(!req.query){
         throw new error.AppError(exceptions.exceptionType.productos.badRequest,"Se debe ingresar id_user")
     }
+    //
+
     const filter = {
         sender_id: req.query.id_user
     }
