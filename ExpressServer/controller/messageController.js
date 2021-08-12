@@ -88,13 +88,17 @@ const getAllMsgReceived = async (req,res)=>{
 }
 
 const updatedMessage = async (req,res)=>{
-    const data = req.body
+    const data = {
+        sent_deleted:req.body.updatedMsgSent,
+        received_deleted:req.body.updatedMsgReceided
+    }    
+    
     const params = req.params
     console.log("actualizar controller - params : "+JSON.stringify(params))
     const id = params.id
     console.log("actualizar controller - body : "+JSON.stringify(data))
-    const actualizado = await messageServices.updatedMessage(id,data)
-    res.status(200).json({actualizado})
+    const eliminado = await messageServices.updatedMessage(id,data)
+    res.status(200).json({eliminado})
 }
 
 module.exports = {

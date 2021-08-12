@@ -23,7 +23,7 @@ router.get('/receivedmsg', (req, res) =>{
 router.post('/newmsg', (req, res) =>{
     routeController.handleRequest(req, res,messageController.createMessage)
 })
-router.patch('/deleted', (req, res) =>{
+router.put('/deleted:id', (req, res) =>{
     routeController.handleRequest(req, res,messageController.updatedMessage)
 })
 

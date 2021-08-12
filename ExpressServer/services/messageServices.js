@@ -59,6 +59,7 @@ const getAllMsgSent = async({sender_id})=>{
     const where = {}
     if (sender_id){
         where. sender_id =  sender_id;
+        where. sent_deleted = 1;
     }
     // if (email){
     //     where.email = email;
@@ -77,6 +78,7 @@ const getAllMsgReceived = async({recipient_id})=>{
     const where = {}
     if (recipient_id){
         where. recipient_id = recipient_id;
+        where. received_deleted = 1;
     }
     // if (email){
     //     where.email = email;
@@ -89,20 +91,27 @@ const getAllMsgReceived = async({recipient_id})=>{
     return messages;
 }
 
-const updatedMessage = async (id,data) =>{
-    const {sender_deleted,recipient_deleted} = data;
-    console.log("mensaje estado"+JSON.stringify({sender_deleted,recipient_deleted}));
-    const message = await MessageModel.update({sender_deleted,recipient_deleted},{
-        where: {
-            id_message: id
-        }
-    });
-    if (!message){
-        return false
+const updatedMessage = async (id,{sent_deleted,received_deleted}) =>{
+    
+    where={}
+    if(id){
+      where. id_message = id;
     }
-
-    return true
+    const data ={
+      sent_deleted:sent_deleted,
+      received_deleted:received_deleted,
+    }
+    console.log("mensaje estado"+JSON.stringify({sent_deleted,received_deleted}));
+    const message = await MessageModel.update(data,{
+        where:where});
+    console.log(JSON.stringify(message));
+    // if (!message){
+    //     return false
+    // }
+  
+    return message
 }
+
 
 module.exports = {
     getAllService,
