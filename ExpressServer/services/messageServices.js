@@ -89,9 +89,25 @@ const getAllMsgReceived = async({recipient_id})=>{
     return messages;
 }
 
+const updatedMessage = async (id,data) =>{
+    const {sender_deleted,recipient_deleted} = data;
+    console.log("mensaje estado"+JSON.stringify({sender_deleted,recipient_deleted}));
+    const message = await MessageModel.update({sender_deleted,recipient_deleted},{
+        where: {
+            id_message: id
+        }
+    });
+    if (!message){
+        return false
+    }
+
+    return true
+}
+
 module.exports = {
     getAllService,
     createMessage,
     getAllMsgSent,
-    getAllMsgReceived
+    getAllMsgReceived,
+    updatedMessage
 }

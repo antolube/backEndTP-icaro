@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const { sequelizeConnection } = require('../config/server/sequelizeConfig')
-// const constants = require("../common/constants")
-
+const constants = require("../common/constants")
 
 const MessageModel = sequelizeConnection.define(
     'message',
@@ -27,6 +26,12 @@ const MessageModel = sequelizeConnection.define(
             allowNull: true,
             field: 'sender_name',
         },
+        sent_deleted:{
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            field: 'sent_deleted',
+            defaultValue: constants.estado.ACTIVO
+        },
         recipient_id:{
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -36,6 +41,12 @@ const MessageModel = sequelizeConnection.define(
             type: Sequelize.STRING,
             allowNull: true,
             field: 'recipient_name',
+        },
+        received_deleted:{
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            field: 'received_deleted',
+            defaultValue: constants.estado.ACTIVO
         },
         created_at: {
             type: Sequelize.DATE,
