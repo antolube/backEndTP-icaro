@@ -35,8 +35,8 @@ export class UserService {
   }
 
 
-  updateddMsg(id:string | number,data:any) {
-    return this.http.put(`${this.URL}users/deleted/$${id}`,data);
+  updatedMsg(id: number,data:any) {
+    return this.http.put(`${this.URL}users/deleted${id}`,data);
   }
     // Update
   // updateBook(id:any, data:any): Observable<any> {

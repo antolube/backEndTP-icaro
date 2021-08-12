@@ -12,6 +12,11 @@ export class SentMessageComponent implements OnInit {
 
   msg: any =[];
 
+  deleted:any ={
+    id_message: 'number',
+    updatedMsg: 'string',
+  };
+
   displayedColumns: string[] = ['remitente', 'fecha', 'mensaje', 'acciones'];
 
   dataSource!:MatTableDataSource<any>;
@@ -31,10 +36,17 @@ export class SentMessageComponent implements OnInit {
   cargarMensajes(){
   }
 
-  eliminarMensaje(index: number){
-    // this._messagesService.eliminarMensaje(index);
-    // console.log(index);
-    this.cargarMensajes();
+  updatedMsg(id_message:number){
+
+    console.log(id_message);
+
+    this.deleted = {
+      updatedMsgSent: 0 ,//paso a elminado de las lista de enviados
+      updatedMsgReceided: undefined,
+    };
+    this._userService.updatedMsg(id_message,this.deleted).subscribe(data =>{
+      console.log("Estoy eliminando el mensaje de enviados"+JSON.stringify(data));
+    })
   }
 
 }

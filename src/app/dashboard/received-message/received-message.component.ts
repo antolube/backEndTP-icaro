@@ -12,10 +12,10 @@ export class ReceivedMessageComponent implements OnInit {
 
    msg: any=[];
 
-  // deleted:any ={
-  //   id_message: 'string',
-  //   updatedMsg: 'string',
-  // };
+  deleted:any ={
+    id_message: 'number',
+    updatedMsg: 'string',
+  };
 
   usuarioMostrar: any = [];
 
@@ -45,16 +45,17 @@ export class ReceivedMessageComponent implements OnInit {
     cargarMensajes():void{
   }
 
-  updatedMsg(id_message:any){
+  updatedMsg(id_message:number){
 
     console.log(id_message);
-    // this.deleted = {
-    //  id_message:id_message,
-    //  updatedMsg : 0,
-    // };
-    // this._userService.updateddMsg(this.deleted).subscribe(data =>{
-    //   console.log(data);
-    // })
+
+    this.deleted = {
+      updatedMsgSent: undefined ,//activo
+      updatedMsgReceided: 0,//elimino de mensajes recibidos
+    };
+    this._userService.updatedMsg(id_message,this.deleted).subscribe(data =>{
+      console.log("Estoy eliminando el mensaje de recibidos"+JSON.stringify(data));
+    })
   }
 
 }

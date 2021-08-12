@@ -29,8 +29,8 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="acciones">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td class="pointer" mat-cell *matCellDef="let element ;let i = index " style="text-align:right;">
-            <a (click)="eliminarMensaje(i)" matTooltip="Eliminar"
+          <td class="pointer" mat-cell *matCellDef="let element " style="text-align:right;">
+            <a (click)="updatedMsg(element.id_message)" matTooltip="Eliminar"
             matTooltipPosition="left"
             aria-tooltip="Button that displays and hides a tooltip triggered by other" >
               <mat-icon>delete</mat-icon>

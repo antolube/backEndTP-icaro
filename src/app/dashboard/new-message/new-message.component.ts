@@ -58,7 +58,7 @@ export class NewMessageComponent implements OnInit {
     console.log(JSON.stringify(this._tokenStorage.username()))
   }
 
-  // getTraerUsuarios(){
+  // getTraerUsuarios(){ 
   //   this.usuarios = this._userService.getDiary();
   // }
 
