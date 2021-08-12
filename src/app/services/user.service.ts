@@ -35,5 +35,17 @@ export class UserService {
   }
 
 
+  updateddMsg(id:string | number,data:any) {
+    return this.http.put(`${this.URL}users/deleted/$${id}`,data);
+  }
+    // Update
+  // updateBook(id:any, data:any): Observable<any> {
+  //     let API_URL = `${this.REST_API}/update-book/${id}`;
+  //     return this.httpClient.put(API_URL, data, { headers: this.httpHeaders })
+  //       .pipe(
+  //         catchError(this.handleError)
+  //       )
+  //   }
+
 
 }

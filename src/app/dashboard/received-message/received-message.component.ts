@@ -12,6 +12,11 @@ export class ReceivedMessageComponent implements OnInit {
 
    msg: any=[];
 
+  // deleted:any ={
+  //   id_message: 'string',
+  //   updatedMsg: 'string',
+  // };
+
   usuarioMostrar: any = [];
 
   displayedColumns: string[] = ['remitente', 'fecha', 'mensaje', 'acciones'];
@@ -40,10 +45,16 @@ export class ReceivedMessageComponent implements OnInit {
     cargarMensajes():void{
   }
 
-  eliminarMensaje(index: number){
-    // this._messagesService.eliminarMensaje(index);
-    // console.log(index);
-    this.cargarMensajes();
+  updatedMsg(id_message:any){
+
+    console.log(id_message);
+    // this.deleted = {
+    //  id_message:id_message,
+    //  updatedMsg : 0,
+    // };
+    // this._userService.updateddMsg(this.deleted).subscribe(data =>{
+    //   console.log(data);
+    // })
   }
 
 }
