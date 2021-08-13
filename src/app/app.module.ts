@@ -14,8 +14,6 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt'
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
-// import { authInterceptorProviders } from './services/auth-interceptor.service';
-// import { TokenStorageService } from './services/token-storage.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +42,7 @@ import { FooterComponent } from './shared/footer/footer.component';
       useClass: TokenInterceptorService,
       multi: true
      },
-    // authInterceptorProviders
+
   ],
   bootstrap: [AppComponent]
 })

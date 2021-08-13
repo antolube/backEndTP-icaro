@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import  { User } from 'src/app/models/userModel';
 import { AuthService } from 'src/app/services/auth.service';
 
 interface Province{
@@ -25,8 +24,6 @@ export class SingUpComponent implements OnInit {
   panelOpenState = false;
   hide = true;
   loading= false;
-  // isSuccessful = false;
-  // isSignUpFailed = false;
   errorMessage = '';
 
   provinces: Province[] = [
@@ -46,8 +43,6 @@ export class SingUpComponent implements OnInit {
     private router: Router,
     private _snackbar:MatSnackBar,
     private _authService: AuthService,
-    // private _usuariosService:UsuariosService ,
-    // private _comunicacion:InteractionsService
     ) {
 
       this.register = this.fb.group({
@@ -74,7 +69,6 @@ export class SingUpComponent implements OnInit {
       name: this.register.value.name,
       last_name: this.register.value.last_name,
       password: this.register.value.password,
-      // confirmPassword: this.register.value.confirmPassword,
       email: this.register.value.email,
       country: this.register.value.country,
       city: this.register.value.city,
@@ -84,21 +78,14 @@ export class SingUpComponent implements OnInit {
 
     this._authService.register(user).subscribe((res:any) => {
         console.log(res);
-        // this.isSuccessful = true;
-        // this.isSignUpFailed = false;
         console.log("se lo pasa al servico");
       },
       err => {
         this.errorMessage = err.error.message;
-        // this.isSignUpFailed = true;
       }
       );
-    // this._usuariosService.agregarUsuario(user);
     this.fakelogin();
     this.registroOk();
-    // this.comunicoUsuario();
-
-
   }
 
   fakelogin(){
@@ -106,7 +93,7 @@ export class SingUpComponent implements OnInit {
     setTimeout(()=>{
       //redirecccionamos al al escritorio
       // this.loading= false;
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/singin']);
     },1500
     );
   }
@@ -120,8 +107,5 @@ export class SingUpComponent implements OnInit {
         }
     );
   }
-  // comunicoUsuario(){
-  //   this._comunicacion.saveUser(this.register.value.username);
-  //   console.log("estoy tomando este dato para pasarlo :",this.register.value.username);
-  }
+}
 

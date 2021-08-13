@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, MaxLengthValidator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/models/userModel';
 import { Message } from 'src/app/models/messageModel';
-import { AuthService } from 'src/app/services/auth.service';
+import { Router} from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
@@ -15,7 +13,6 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 })
 export class NewMessageComponent implements OnInit {
 
-  // message: Message;
   diary:any=[];
   loading= false;
   form: FormGroup;
@@ -25,51 +22,40 @@ export class NewMessageComponent implements OnInit {
     sender_id: 'string' ,
     sender_name: '',
     recipient_id:'string',
-    // recipient_name:'string',
     message:'string',
     create_at:'string',
   };
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private _snackbar: MatSnackBar,
     private _userService: UserService,
-    private _authService: AuthService,
     private _tokenStorage: TokenStorageService,
+    private router: Router,
   )
   {
       this.form = this.fb.group({
         remitente:['', Validators.required],
-        // fecha:new Date(),
         mensaje:['', Validators.required]
       })
     }
 
   ngOnInit(): void {
       this._userService.getDiary().subscribe((data) => {
-      console.log("estos son los contactos para el diary: "+JSON.stringify(data));
+      // console.log("estos son los contactos para el diary: "+JSON.stringify(data));
       this.diary = data;
-      // console.log(this.diary)
     });
     this._tokenStorage.userId();
     this._tokenStorage.username();
-    this._tokenStorage.userEmail();
-    console.log(JSON.stringify(this._tokenStorage.username()))
+    // console.log(JSON.stringify(this._tokenStorage.username()))
   }
-
-  // getTraerUsuarios(){ 
-  //   this.usuarios = this._userService.getDiary();
-  // }
 
   SendMsj():void{
 
       this.msg= {
-
       sender_id: this._tokenStorage.userId(),
       sender_name:this._tokenStorage.username(),
       recipient_id: JSON.parse(this.form.value.remitente),
-      // recipient_name:JSON.parse(this.form.value.remitente),
       message:this.form.value.mensaje,
       create_at: '',
     };
@@ -78,12 +64,8 @@ export class NewMessageComponent implements OnInit {
       console.log(JSON.stringify(data));
     });
 
-
     this.fakeSend();
-    this.router.navigate(['/dashboard'])
-    // this._interactionsService.nvoMsj(this.form.value.mensaje);
     console.log("estoy enviando el mensaje:"+JSON.stringify(this.msg));
-
   }
 
   fakeSend(){
@@ -99,13 +81,12 @@ export class NewMessageComponent implements OnInit {
         verticalPosition:'top',
       });
       this.loading= false;
-
-    },1500
-    );
+    },1500);
   }
 
   reloadPage(): void {
     window.location.reload();
+
   }
 
 }

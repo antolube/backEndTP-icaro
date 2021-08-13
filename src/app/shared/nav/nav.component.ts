@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-// import { AuthService } from 'src/app/services/auth.service';
-// import { TokenInterceptorService } from 'src/app/services/token-interceptor.service';
-// import { UserService } from 'src/app/services/user.service';
-// import { Router} from '@angular/router';
 import { TokenStorageService} from 'src/app/services/token-storage.service';
 @Component({
   selector: 'app-nav',
@@ -16,11 +11,7 @@ export class NavComponent implements OnInit {
   user_name?:string;
 
   constructor(
-
     private _tokenStorage: TokenStorageService,
-    private _authService: AuthService,
-
-
   ) { }
 
   ngOnInit():void{

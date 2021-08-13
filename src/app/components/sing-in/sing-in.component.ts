@@ -38,18 +38,6 @@ export class SingInComponent implements OnInit {
 
   }
 
-  // ingresar(){
-  //     const user_name = this.form.value.usuario;
-  //   const password = this.form.value.password;
-
-  //   this._authService.login(user_name, password).subscribe( (data:any) =>{
-  //     console.log(data);
-  //     window.sessionStorage.setItem('token',data.token);
-  //     this.router.navigate(['/dashboard'])
-  //   });
-  // }
-
-
   ingresar(){
     console.log(this.form);
     const user_name = this.form.value.usuario;
@@ -58,7 +46,6 @@ export class SingInComponent implements OnInit {
     this._authService.login(user_name, password).subscribe(
       data=> {
         this._tokenStorage.saveToken(data.token);
-        this._tokenStorage.saveUser(data);
         this.fakelogin();
       },
       err => {

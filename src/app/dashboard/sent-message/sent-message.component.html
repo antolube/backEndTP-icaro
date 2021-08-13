@@ -1,7 +1,7 @@
-<p>sent-message works!</p>
+
 <div class="enviados">
   <div class="enviados1">
-    <h1>la cantidad de mensajes es {{msg.length}} </h1>
+    <h1>la cantidad de mensajes enviados es {{msg.length}} </h1>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
@@ -9,8 +9,8 @@
         The actual rendered columns are set as a property on the row definition" -->
 
         <!-- Position Column -->
-        <ng-container matColumnDef="remitente">
-          <th mat-header-cell *matHeaderCellDef> remitente </th>
+        <ng-container matColumnDef="destinatario">
+          <th mat-header-cell *matHeaderCellDef> destinatario</th>
           <td mat-cell *matCellDef="let element" > {{element.recipient_name}} </td>
         </ng-container>
 
@@ -41,9 +41,5 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-      </mat-paginator> -->
     </div>
   </div>

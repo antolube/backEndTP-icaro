@@ -1,6 +1,6 @@
 <div class="recibidos">
   <div class="recibidos1">
-    <h1>la cantidad de mensajes es {{msg.length}} {{usuarioMostrar}} </h1>
+    <h1>la cantidad de mensajes recibidos es {{msg.length}}</h1>
     <div *ngFor="let usuario of usuarioMostrar">
       <h3>{{usuarioMostrar}}</h3>
     </div>
@@ -38,7 +38,6 @@
             </a>
           </td>
         </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
