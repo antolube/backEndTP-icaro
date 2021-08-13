@@ -11,9 +11,4 @@ router.post('/singup', (req, res) => {
   routeController.handleRequest(req, res, UserController.create)
 })
 
-// router.get('/logout',(req, res)=>{
-//   routeController.handleRequest(req, res, UserController.logout)
-// })
-
-
 module.exports = router

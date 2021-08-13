@@ -4,23 +4,20 @@ const exceptions = require('../common/exceptions');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require("config")
-// const logger = require('../config/server/logger')(__filename)
-
 
 const create = async ({user_name, password,name,last_name,country,city,email}) => {
-    // logger.info(`createUser - userName[${userName}]`)
-    console.log("createUser - userName["+ user_name+"]");
-//Check Duplicate UserName
-const userExist = await userModel.findOne({where: {user_name:user_name.toLowerCase()}});
-if(userExist){
+  console.log("createUser - userName["+ user_name+"]");
+  //Check Duplicate UserName
+  const userExist = await userModel.findOne({where: {user_name:user_name.toLowerCase()}});
+  if(userExist){
   throw new error.AppError(exceptions.exceptionType.users.userExists);
-}
+  }
 
-//Check Duplicate Email
-const emailExist = await userModel.findOne({where: {email:email.toLowerCase()}});
-if(emailExist){
+  //Check Duplicate Email
+  const emailExist = await userModel.findOne({where: {email:email.toLowerCase()}});
+  if(emailExist){
   throw new error.AppError(exceptions.exceptionType.users.emailExists);
-}
+  }
 
     const data = {
       user_name:user_name.toLowerCase(),
@@ -38,7 +35,6 @@ if(emailExist){
       return await userModel.create(data)
     } catch (e) {
       const errorMessage = `Create User - Detail: ` + e.message
-      // logger.error(errorMessage)
       console.error("createUser - user_name["+ user_name+"]");
       throw new error.AppError(exceptions.exceptionType.database.entity.canNotBeCreated, errorMessage)
     }
@@ -84,25 +80,8 @@ const getById = async (id) =>{
     return usuario;
 }
 
-// const create = async (data) =>{
-//     const {user_name,name,last_name,country,city,email,condition} = data
-//     console.log("Create User :"+ JSON.stringify({user_name,name,last_name,country,city,email,condition}));
-//     const usuario = await userModel.create({
-
-//         user_name,
-//         name,
-//         last_name,
-//         country,
-//         city,
-//         email,
-//         condition
-//     })
-
-//     return usuario.id_user;
-// }
-
 const login = async ({user_name, password}) => {
-    console.log("login - user_name["+ user_name+"]"+ " - password["+ password+"]" );
+    // console.log("login - user_name["+ user_name+"]"+ " - password["+ password+"]" );
     const user = await userModel.findOne({where: {user_name:user_name.toLowerCase()}})
     const isMatch = user && (await comparePass(password,user.password))
     if(!isMatch){
@@ -124,7 +103,7 @@ const generateToken = (id_user,user_name) =>{
 
 const updated = async (id,data) =>{
     const {user_name,name,last_name,country,city,email,condition} = data;
-    console.log("actualizar produucto"+JSON.stringify({user_name,name,last_name,country,city,email,condition}));
+    // console.log("actualizar produucto"+JSON.stringify({user_name,name,last_name,country,city,email,condition}));
     const user = await userModel.update({condition},{
         where: {
             id_user: id
@@ -138,7 +117,7 @@ const updated = async (id,data) =>{
 }
 
 const deleted= async (id) =>{
-    console.log("Deleted -id: " + id);
+    // console.log("Deleted -id: " + id);
     const id_user = id
     const usuario = await userModel.destroy(
         {
